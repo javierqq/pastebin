@@ -23,6 +23,6 @@ git pull origin <nombre de una rama>
 . venv/bin/activate
 deactivate
 export FLASK_APP=project.py
-flask run
+flask run 
 flask run --host=0.0.0.0 <visible a otras maquinas>
 ```
