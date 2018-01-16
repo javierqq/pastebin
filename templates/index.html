@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Protobin</title>
+  </head>
+  <body>
+    <h1>Protobin</h1>
+    <ul class="pages">
+      <form action="/txt" method="post">
+      <li class="login page">
+        Username: <input name="username" type="text" id="inputUsername" class="form-control" value="{{ request.form.username }}" placeholder="" required autofocus>
+      </li>
+      <li class="menu">
+        Languaje: <select name="languaje" method="GET" action="/">
+        {% for languaje in languajes %}
+        <option value= "{{languaje}}" SELECTED>{{languaje}}</option>"
+        {% endfor %}
+        </select>
+      </li>
+      <li class="input page">
+        <div class="form">
+        Code:
+        </div>
+        <textarea name="text" type="text" id="inputText" class="form-control" value="{{ request.form.text }}" rows="20" cols="70"></textarea>
+        <br>
+      </li>
+        <button name="submit" type="submit" value="Do Something">Paste</button><br>
+      </form>
+    </ul>
+  </body>
+</html>
