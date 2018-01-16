@@ -1,2 +1,7 @@
 .vagrant/
 *.log
+ex_sample.txt
+ex2.py
+ex3.py
+__pycache__
+project/*
