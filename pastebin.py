@@ -19,30 +19,34 @@ app.jinja_env.globals['url_for_other_page'] = url_for_other_page
 class Paste(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.Text)
+    display_name = db.Column(db.String(120))
+    #lang = db.Column(db.Text)
     pub_date = db.Column(db.DateTime)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer)
     parent_id = db.Column(db.Integer, db.ForeignKey('paste.id'))
     parent = db.relationship('Paste', lazy=True, backref='children',
                              uselist=False, remote_side=[id])
 
-    def __init__(self, user, code, parent=None):
+    def __init__(self, user, display_name, code, parent=None):
         self.user = user
+        self.display_name = display_name
         self.code = code
+        #self.lang = lang
         self.pub_date = datetime.utcnow()
         self.parent = parent
 
-
+"""
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     display_name = db.Column(db.String(120))
-    fb_id = db.Column(db.String(30), unique=True)
     pastes = db.relationship(Paste, lazy='dynamic', backref='user')
-
+"""
 @app.before_request
 def check_user_status():
     g.user = None
     if 'user_id' in session:
-        g.user = User.query.get(session['user_id'])
+        g.user = request.form['display_name']
+
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -52,7 +56,7 @@ def new_paste():
     if reply_to is not None:
         parent = Paste.query.get(reply_to)
     if request.method == 'POST' and request.form['code']:
-        paste = Paste(g.user, request.form['code'], parent=parent)
+        paste = Paste(g.user, request.form['display_name'], request.form['code'], parent=parent)
         db.session.add(paste)
         db.session.commit()
         if parent is not None:

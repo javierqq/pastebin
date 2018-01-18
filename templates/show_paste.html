@@ -28,6 +28,7 @@
       {%- endfor %}
     {% endif %}
   </dl>
+  <div class=display_name>{{ paste.display_name }}</div>
   <div class=code><pre>{{ paste.code }}</pre></div>
   <script type=text/javascript>
     pastebin.subscribePaste({{ paste.id }});
