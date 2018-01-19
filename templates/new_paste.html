@@ -6,6 +6,13 @@
     <li class=display_name>
         Username: <input name=display_name type="String" placeholder="" required autofocus>
     </li>
+    <li class="menu">
+        Languaje: <select name="languaje" method="GET" action="/">
+        {% for languaje in languajes %}
+        <option value= "{{languaje}}" SELECTED>{{languaje}}</option>"
+        {% endfor %}
+        </select>
+      </li>
     <div class=code><textarea name=code cols=60 rows=18>{{ parent.code }}</textarea></div>
     <p><input type=submit value="New Paste">
   </form>
