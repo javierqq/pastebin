@@ -20,18 +20,18 @@ class Paste(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.Text)
     display_name = db.Column(db.String(120))
-    #lang = db.Column(db.Text)
+    languaje = db.Column(db.Text)
     pub_date = db.Column(db.DateTime)
     user_id = db.Column(db.Integer)
     parent_id = db.Column(db.Integer, db.ForeignKey('paste.id'))
     parent = db.relationship('Paste', lazy=True, backref='children',
                              uselist=False, remote_side=[id])
 
-    def __init__(self, user, display_name, code, parent=None):
+    def __init__(self, user, display_name, languaje, code, parent=None):
         self.user = user
         self.display_name = display_name
         self.code = code
-        #self.lang = lang
+        self.languaje = languaje
         self.pub_date = datetime.utcnow()
         self.parent = parent
 
@@ -51,17 +51,18 @@ def check_user_status():
 @app.route('/', methods=['GET', 'POST'])
 def new_paste():
     parent = None
+    languajes = ['Python', 'Ruby', 'JavaScript', 'C']
     reply_to = request.args.get('reply_to', type=int)
     if reply_to is not None:
         parent = Paste.query.get(reply_to)
     if request.method == 'POST' and request.form['code']:
-        paste = Paste(g.user, request.form['display_name'], request.form['code'], parent=parent)
+        paste = Paste(g.user, request.form['display_name'], request.form['languaje'], request.form['code'], parent=parent)
         db.session.add(paste)
         db.session.commit()
         if parent is not None:
             send_new_paste_notifications(parent, paste)
         return redirect(url_for('show_paste', paste_id=paste.id))
-    return render_template('new_paste.html', parent=parent)
+    return render_template('new_paste.html', parent=parent, languajes=languajes)
 
 
 @app.route('/<int:paste_id>')
