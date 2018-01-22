@@ -17,3 +17,9 @@ git checkout <nombre de otra rama>
 git checkot -b <nombre de una nueva rama>
 git pull origin <nombre de una rama>
 ```
+
+# Después del `vagrant ssh`
+```
+cd /vagrant
+pip install -r requirements.txt
+```
