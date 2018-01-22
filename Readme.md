@@ -20,6 +20,9 @@ git pull origin <nombre de una rama>
 
 # Después del `vagrant ssh`
 ```
+echo "export LC_ALL=C.UTF-8 \nexport LANG=C.UTF-8" >> .profile
+exit
+vagrant ssh
 cd /vagrant
 pip install -r requirements.txt
 ```
