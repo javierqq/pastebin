@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}New Paste{% endblock %}
+{% block body %}
+  <h2>New Paste</h2>
+  <form action="" method=post>
+    <li class=display_name>
+        Username: <input name=display_name type="String" placeholder="" required autofocus>
+    </li>
+    <div class=code><textarea name=code cols=60 rows=18>{{ parent.code }}</textarea></div>
+    <p><input type=submit value="New Paste">
+  </form>
+{% endblock %}
