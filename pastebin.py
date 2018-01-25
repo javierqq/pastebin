@@ -47,7 +47,6 @@ def check_user_status():
     if 'user_id' in session:
         g.user = request.form['display_name']
 
-
 @app.route('/', methods=['GET', 'POST'])
 def new_paste():
     parent = None
