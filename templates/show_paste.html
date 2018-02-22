@@ -12,7 +12,7 @@
     {% endif %}
     <dt>Date
     <dd>{{ paste.pub_date.strftime('%Y-%m-%d @ %H:%M') }}
-<!--      
+<!--
     <dt>Actions
     <dd>
       <a href="{{ url_for('new_paste', reply_to=paste.id) }}">Reply</a>
@@ -34,8 +34,5 @@
   </dl>
   <div class=display_name >{{ paste.display_name }}</div>
   <div>{{ paste.languaje }}</div>
-  <div class=code><pre>{{ paste.code }}</pre></div>
-  <script type=text/javascript>
-    pastebin.subscribePaste({{ paste.id }});
-  </script>
+  <pre><code class="{{ paste.languaje }}" >{{ paste.code }}</code></pre>
 {% endblock %}

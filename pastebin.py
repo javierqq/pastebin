@@ -48,7 +48,7 @@ def check_user_status():
 @app.route('/', methods=['GET', 'POST'])
 def new_paste():
     parent = None
-    languajes = ['Python', 'Ruby', 'JavaScript', 'C']
+    languajes = ['Python', 'Ruby', 'JavaScript', 'C', 'html']
     reply_to = request.args.get('reply_to', type=int)
     if reply_to is not None:
         parent = Paste.query.get(reply_to)
