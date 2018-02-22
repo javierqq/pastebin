@@ -6,3 +6,5 @@ ex3.py
 __pycache__
 project/*
 pastebin.db
+.DS_Store
+.profile
