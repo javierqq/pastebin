@@ -8,4 +8,6 @@ ADD requirements.txt /code
 RUN pip install -r requirements.txt
 ADD . /code/
 
-CMD ["python", "manage.py", "runserver", "-h", "0.0.0.0"]
+ENTRYPOINT ["python", "manage.py"]
+
+CMD ["runserver", "-h", "0.0.0.0"]
