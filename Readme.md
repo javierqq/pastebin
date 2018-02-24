@@ -26,3 +26,12 @@ vagrant ssh
 cd /vagrant
 pip install -r requirements.txt
 ```
+# Crear tabla de lenguajes y agregar lenguajes en base de datos
+```
+CREATE TABLE languages (
+    id INT NOT NULL auto_increment primary key,
+    name varchar(255) not null
+    );
+
+INSERT into languages (name) VALUES ('lenguaje');
+```
