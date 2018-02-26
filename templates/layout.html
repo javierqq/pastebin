@@ -1,14 +1,15 @@
 <!doctype html>
 <head>
-  <link rel="stylesheet"  href="/static/highlight/styles/atom-one-light.css">
-<script src="/static/highlight/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-  <title>{% block title %}{% endblock %} | Flask Pastebin</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css?q=10">
+    <link rel="stylesheet"  href="/static/highlight/styles/atom-one-light.css">
+    <script src="/static/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <title>{% block title %}{% endblock %} | Flask Pastebin</title>
 </head>
 <div class=page>
-  <h1>Pastebin</h1>
-  {% for message in get_flashed_messages() %}
+    <h1>Pastebin</h1>
+    {% for message in get_flashed_messages() %}
     <p class=flash>{{ message }}
-  {% endfor %}
-  {% block body %}{% endblock %}
+    {% endfor %}
+    {% block body %}{% endblock %}
 </div>
