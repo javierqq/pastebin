@@ -13,8 +13,8 @@
     </p>
     <p class="menu">
         Languaje: <select name="languaje" method="GET" action="/">
-        {% for languaje in languajes %}
-        <option value= "{{languaje}}" SELECTED>{{languaje}}</option>"
+        {% for languaje in langs %}
+        <option value= "{{ languaje }}" SELECTED>{{ languaje.name }}</option>"
         {% endfor %}
         </select>
     </p>

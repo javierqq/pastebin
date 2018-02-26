@@ -2,7 +2,9 @@ from datetime import datetime
 from flask import Flask, request, url_for, redirect, g, session, flash, \
      abort, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flaskext.mysql import MySQL
 
+mysql = MySQL()
 app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
 db = SQLAlchemy(app)
@@ -48,7 +50,8 @@ def check_user_status():
 @app.route('/', methods=['GET', 'POST'])
 def new_paste():
     parent = None
-    languajes = ['Python', 'Ruby', 'JavaScript', 'C', 'html']
+    data = db.engine.execute("SELECT name FROM languages order by name asc")
+    langs = data.fetchall()
     reply_to = request.args.get('reply_to', type=int)
     if reply_to is not None:
         parent = Paste.query.get(reply_to)
@@ -59,7 +62,7 @@ def new_paste():
         if parent is not None:
             send_new_paste_notifications(parent, paste)
         return redirect(url_for('show_paste', paste_id=paste.id))
-    return render_template('new_paste.html', parent=parent, languajes=languajes)
+    return render_template('new_paste.html', parent=parent, langs=langs)
 
 
 @app.route('/<int:paste_id>')
