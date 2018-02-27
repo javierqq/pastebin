@@ -2,9 +2,11 @@ from datetime import datetime
 from flask import Flask, request, url_for, redirect, g, session, flash, \
      abort, render_template
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_CONNECTION_STRING')
 db = SQLAlchemy(app)
 
 def url_for_other_page(page):
