@@ -1,19 +1,24 @@
 {% extends "layout.html" %}
+
 {% block title %}New Paste{% endblock %}
+
 {% block body %}
-  <h2>New Paste</h2>
+
   <form action="" method=post>
-    <li class=display_name>
-        Username: <input name=display_name type="String" placeholder="" required autofocus>
-    </li>
-    <li class="menu">
+      <p>Este sitio pretende ser un repositorio temporal disponible para compartir <em>snippets</em> poco sensibles.
+      No garantizamos que la informaci&oacute;n sea permanente.
+      <br><b>S&iacute;</b> garantizamos que la informaci&oacute;n ser&aacute; p&uacute;blica.</p> 
+    <p class=display_name>
+        User: <input name=display_name type="String" placeholder="" required autofocus>
+    </p>
+    <p class="menu">
         Languaje: <select name="languaje" method="GET" action="/">
-        {% for languaje in languajes %}
-        <option value= "{{languaje}}" SELECTED>{{languaje}}</option>"
+        {% for languaje in langs %}
+        <option value= "{{ languaje }}" SELECTED>{{ languaje.name }}</option>"
         {% endfor %}
         </select>
-      </li>
-    <div class=code><textarea name=code cols=60 rows=20>{{ parent.code }}</textarea></div>
+    </p>
+    <div class=code><textarea name=code cols=80 rows=24>{{ parent.code }}</textarea></div>
     <p><input type=submit value="New Paste">
   </form>
 {% endblock %}
