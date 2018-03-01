@@ -1,10 +1,26 @@
 body            { font-family: sans-serif; background: #e2e2e2;  }
-a, h1, h2       { color: #377ba8;  }
+a, h1, h2       { color: #1641B7;  }
 h1, h2          { font-family: 'Roboto', serif; margin: 0;  }
 h1              { border-bottom: 2px solid #eee;  }
 h2              { font-size: 1.2em;  }
+th              { color: #1641B7;  }
+td.hljs-ln-numbers {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 
-.page           { margin: 2em auto; width: 80em; border: 2px solid #ccc; padding: 1em; background: white; }
+	text-align: center;
+	color: #ccc;
+	border-right: 8px solid #fdf6e3;
+	vertical-align: top;
+	padding-right:  5px;
+  margin-right: 10em;
+}
+
+.page           { margin: 2em auto; width: 80%auto; border: 2px solid #ccc; padding: 1em; background: white; }
 .entries        { list-style: none; margin: 0; padding: 0;  }
 .entries li     { margin: 0.8em 1.2em;  }
 .entries li h2  { margin-left: -1em;  }
