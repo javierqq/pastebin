@@ -71,3 +71,7 @@ def new_paste():
 def show_paste(paste_id):
     paste = Paste.query.options(db.eagerload('children')).get_or_404(paste_id)
     return render_template('show_paste.html', paste=paste)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
