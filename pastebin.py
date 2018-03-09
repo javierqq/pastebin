@@ -6,7 +6,7 @@ import os
 from flaskext.mysql import MySQL
 
 mysql = MySQL()
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.config.from_pyfile('config.cfg')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_CONNECTION_STRING')
 db = SQLAlchemy(app)
@@ -75,3 +75,7 @@ def show_paste(paste_id):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+@app.route('/help')
+def show_help():
+    return render_template('help.html')
