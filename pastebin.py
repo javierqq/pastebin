@@ -6,7 +6,7 @@ import os
 from flaskext.mysql import MySQL
 
 mysql = MySQL()
-app = Flask(__name__, static_url_path='/static')
+app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_CONNECTION_STRING')
 db = SQLAlchemy(app)
