@@ -75,3 +75,7 @@ def show_paste(paste_id):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+@app.route('/help')
+def show_help():
+    return render_template('help.html')
