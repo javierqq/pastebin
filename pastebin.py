@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Flask, request, url_for, redirect, g, session, flash, \
-     abort, render_template
+     abort, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flaskext.mysql import MySQL
@@ -79,3 +79,7 @@ def page_not_found(e):
 @app.route('/help')
 def show_help():
     return render_template('help.html')
+
+@app.route('/ip')
+def get_ip():
+    return jsonify({'ip': request.remote_addr}), 200
