@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import Flask, request, url_for, redirect, g, session, flash, \
-     abort, render_template
+     abort, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flaskext.mysql import MySQL
@@ -28,14 +28,16 @@ class Paste(db.Model):
     parent_id = db.Column(db.Integer, db.ForeignKey('paste.id'))
     parent = db.relationship('Paste', lazy=True, backref='children',
                              uselist=False, remote_side=[id])
+    ip_addr = db.Column(db.Text)
 
-    def __init__(self, user, display_name, languaje, code, parent=None):
+    def __init__(self, user, display_name, languaje, code, ip_addr, parent=None):
         self.user = user
         self.display_name = display_name
         self.code = code
         self.languaje = languaje
         self.pub_date = datetime.utcnow()
         self.parent = parent
+        self.ip_addr = ip_addr
 
 """
 class User(db.Model):
@@ -55,10 +57,11 @@ def new_paste():
     data = db.engine.execute("SELECT name FROM languages order by name asc")
     langs = data.fetchall()
     reply_to = request.args.get('reply_to', type=int)
+    ip_addr = request.remote_addr
     if reply_to is not None:
         parent = Paste.query.get(reply_to)
     if request.method == 'POST' and request.form['code']:
-        paste = Paste(g.user, request.form['display_name'], request.form['languaje'], request.form['code'], parent=parent)
+        paste = Paste(g.user, request.form['display_name'], request.form['languaje'], request.form['code'], parent=parent, ip_addr=ip_addr)
         db.session.add(paste)
         db.session.commit()
         if parent is not None:
@@ -79,3 +82,7 @@ def page_not_found(e):
 @app.route('/help')
 def show_help():
     return render_template('help.html')
+
+@app.route('/ip')
+def get_ip():
+    return jsonify({'ip': request.remote_addr}), 200

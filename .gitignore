@@ -8,3 +8,4 @@ project/*
 pastebin.db
 .DS_Store
 .profile
+*.sql
